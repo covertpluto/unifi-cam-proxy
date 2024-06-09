@@ -38,8 +38,8 @@ Open https://{NVR IP}/proxy/protect/api/cameras/manage-payload and copy the toke
 ## Docker
 
 Using Docker is the recommended installation method.
-The sample docker-compose file below is the recommended deployment for most users.
-Note, the generated certificate must be in the same directory as the `docker-compose.yaml` file.
+You should create a new directory (```mkdir unifi_cam_proxy```) and put the certificate in the directory.
+The following is an example for a ```docker-compose.yaml``` file for most users. Create this file and put it inside the directory just created.
 
 ```yaml
 version: "3.9"
@@ -49,9 +49,9 @@ services:
     image: keshavdv/unifi-cam-proxy
     volumes:
       - "./client.pem:/client.pem"
-    command: unifi-cam-proxy --host {NVR IP} --cert /client.pem --token {Adoption token} rtsp -s rtsp://192.168.201.15:8554/cam'
+    command: 'unifi-cam-proxy --host {NVR IP} --cert /client.pem --token {Adoption token} rtsp -s rtsp://192.168.201.15:8554/cam'
 ```
-
+Now run ```docker compose up -d``` inside the directory (assuming you have docker compose installed).
 ### Multiple cameras
 
 To use multiple cameras, start an instance of the proxy for each, with a unique MAC address argument.
